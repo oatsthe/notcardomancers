@@ -1,9 +1,3 @@
-function loadmousedragging()
-	local mouseX, mouseY = 0,0
-	local lastMouseX, lastMouseY = 0,0
-	local lastOffX, lastOffY = board.offX, board.offY
-end
-
 function handleMouseInput()
 	local mouseX, mouseY = love.mouse.getPosition()
 	if not love.mouse.isDown(3) then
@@ -14,3 +8,9 @@ function handleMouseInput()
 		board.offY = lastOffY + (mouseY - lastMouseY) / board.zoom
 	end
 end
+
+function getRelativeMousePos()
+	local mouseX, mouseY = love.mouse.getPosition()
+	mouseX, mouseY = (mouseX-love.graphics.getWidth()/2)/board.zoom - board.offX , (mouseY-love.graphics.getHeight()/2)/board.zoom - board.offY
+	return mouseX, mouseY
+end	
